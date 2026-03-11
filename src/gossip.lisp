@@ -359,6 +359,7 @@
 
 (defun gossipsub-subscribe (router topic handler)
   "GossipSub subscribe implementation."
+  (declare (ignore handler))  ; Handler registration not yet implemented
   (with-gossipsub-lock (router)
     (when (member topic (gossipsub-router-topics router) :test #'string=)
       (return-from gossipsub-subscribe nil))
@@ -367,8 +368,6 @@
       (setf (gethash topic (gossipsub-router-mesh router))
             (make-mesh-state topic)))
     (join-topic-mesh router topic))
-  (when handler
-    (declare (ignore handler)))
   t)
 
 (defun gossipsub-unsubscribe (router topic)
@@ -630,7 +629,7 @@
     (let ((message (mcache-get (gossipsub-router-mcache router) msg-id)))
       (when message
         ;; Would send message to peer here
-        (declare (ignore message)))))
+        message)))  ; Reference message to silence warning
   t)
 
 (defun emit-gossip (router)
@@ -695,7 +694,8 @@
       (dolist (peer-id (mesh-get-peers mesh))
         (when (>= (get-peer-score router peer-id) +publish-threshold+)
           ;; Would send message to peer here
-          (declare (ignore peer-id message)))))))
+          (list peer-id message)))))  ; Reference vars to silence warning
+  nil)
 
 (defun publish-to-fanout (router topic message)
   "Publish message to fanout peers for topic."
@@ -714,7 +714,7 @@
     (dolist (peer-id peers)
       (when (>= (get-peer-score router peer-id) +publish-threshold+)
         ;; Would send message to peer here
-        (declare (ignore peer-id message))))))
+        (list peer-id message)))))  ; Reference vars to silence warning
 
 (defun flood-publish-gossipsub (router topic message)
   "Flood publish to all peers subscribed to topic."
@@ -722,7 +722,7 @@
     (dolist (peer-id peers)
       (when (>= (get-peer-score router peer-id) +publish-threshold+)
         ;; Would send message to peer here
-        (declare (ignore peer-id message))))))
+        (list peer-id message)))))  ; Reference vars to silence warning
 
 ;;; ============================================================================
 ;;; MESSAGE HANDLING

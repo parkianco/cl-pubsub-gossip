@@ -277,8 +277,8 @@
                   (send-subscription-to-peer router peer-id msg))
                 (floodsub-router-peers router)))
       (gossipsub-router
-       ;; GossipSub announcement handled separately
-       (declare (ignore msg))))))
+       ;; GossipSub announcement handled separately via fanout
+       msg))))  ; Use msg to avoid warning, actual announcement done elsewhere
 
 (defun send-subscription-to-peer (router peer-id message)
   "Send subscription message to a peer (placeholder for network)."
