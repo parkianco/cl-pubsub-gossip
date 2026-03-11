@@ -1,0 +1,18 @@
+# FASL files
+*.fasl
+*.fas
+*.lib
+*.lx64fsl
+*.dx64fsl
+
+# Editor backups
+*~
+\#*\#
+.\#*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.core
