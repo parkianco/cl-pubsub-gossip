@@ -17,7 +17,7 @@
 (asdf:defsystem #:cl-pubsub-gossip
   :name "cl-pubsub-gossip"
   :version "1.0.0"
-  :author "CLPIC Contributors"
+  :author "Parkian Company LLC"
   :license "MIT"
   :description "Flood-routing pub/sub messaging with GossipSub v1.1 support"
   :long-description "A standalone Common Lisp implementation of publish-subscribe
