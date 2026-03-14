@@ -1,3 +1,6 @@
+;; Copyright (c) 2024-2026 Parkian Company LLC. All rights reserved.
+;; SPDX-License-Identifier: BSD-3-Clause
+
 ;;;; -*- Mode: Lisp; Syntax: ANSI-Common-Lisp; Base: 10 -*-
 ;;;; cl-pubsub-gossip.asd - ASDF system definition
 ;;;;
@@ -16,7 +19,7 @@
 
 (asdf:defsystem #:cl-pubsub-gossip
   :name "cl-pubsub-gossip"
-  :version "1.0.0"
+  :version "0.1.0"
   :author "Parkian Company LLC"
   :license "MIT"
   :description "Flood-routing pub/sub messaging with GossipSub v1.1 support"
@@ -39,11 +42,11 @@ validation."
 
 (asdf:defsystem #:cl-pubsub-gossip/test
   :name "cl-pubsub-gossip/test"
-  :version "1.0.0"
+  :version "0.1.0"
   :description "Tests for cl-pubsub-gossip"
   :depends-on (#:cl-pubsub-gossip)
   :serial t
   :components
   ((:module "test"
     :components
-    ((:file "test-pubsub")))))
+    ((:file "test-pubsub-gossip")))))
